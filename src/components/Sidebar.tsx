@@ -60,30 +60,42 @@ const navItems = [
 export default function Sidebar() {
   const pathname = usePathname();
 
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
+
   return (
-    <aside className="sidebar">
-      <div className="brand">
-        <div className="brand-mark">P</div>
-        <div className="brand-name">BitePrep</div>
-      </div>
-      <nav className="nav">
-        {navItems.map((item) => {
-          const active =
-            item.href === '/'
-              ? pathname === '/'
-              : pathname.startsWith(item.href);
-          return (
+    <>
+      <aside className="sidebar">
+        <div className="brand">
+          <div className="brand-mark">P</div>
+          <div className="brand-name">BitePrep</div>
+        </div>
+        <nav className="nav">
+          {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`nav-item ${active ? 'active' : ''}`}
+              className={`nav-item ${isActive(item.href) ? 'active' : ''}`}
             >
               {item.icon}
               {item.label}
             </Link>
-          );
-        })}
+          ))}
+        </nav>
+      </aside>
+
+      <nav className="bottom-nav">
+        {navItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={`bottom-nav-item ${isActive(item.href) ? 'active' : ''}`}
+          >
+            {item.icon}
+            {item.label}
+          </Link>
+        ))}
       </nav>
-    </aside>
+    </>
   );
 }

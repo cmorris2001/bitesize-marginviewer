@@ -1,11 +1,16 @@
 import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Sidebar from '@/components/Sidebar';
 import { ToastProvider } from '@/components/Toast';
 
 export const metadata: Metadata = {
   title: 'BitePrep — Recipe & Cost Manager',
   description: 'Recipe costing for cafés, with live price-change impact.',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
